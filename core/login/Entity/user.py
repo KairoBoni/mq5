@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from typing import NamedTuple
 
-class User:
-    def __init__(self, id, password, server):
-        self.id = id
-        self.password = password
-        self.server = server
+
+class User(NamedTuple):
+    id: int
+    password: str
+    server: str
