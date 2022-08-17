@@ -45,3 +45,26 @@ def AccountStatus():
         print(df)
     else:
         print("failed to get account info")
+
+
+def GetSell(fromDate, quantity, symbol):
+    ticks = mt5.copy_ticks_from(symbol, fromDate, quantity, 2)
+    
+    # exibimos cada tick numa nova linha
+    print("Exibimos os ticks recebidos como são")
+    count = 0
+    for tick in ticks:
+        count+=1
+        print(tick)
+        if count >= 10:
+            break
+
+    pd.set_option('display.max_columns', 500)
+    pd.set_option('display.width', 1500)
+
+    ticks_frame = pd.DataFrame(ticks)
+
+    ticks_frame['time'] = pd.to_datetime(ticks_frame['time'], unit='s')
+
+    print("\nExibimos o dataframe com ticks")
+    print(ticks_frame.head(10))
